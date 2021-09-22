@@ -1,0 +1,19 @@
+@import './utilites.scss';
+
+.WorkoutForm {
+    color: $color-lightgrey;
+    margin-bottom: 10rem;
+    &-title {
+        color: $color-light;
+    }
+    &-settings {
+        img { width: 1.5rem; }
+    }
+
+    &-button {
+        @include button;
+    }
+    &-cancelWorkout {
+        color: $color-danger;
+    }
+}

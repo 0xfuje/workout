@@ -1,0 +1,28 @@
+@import './utilites.scss';
+
+.Navbar {
+    display: flex;
+    justify-content: center;
+    &-list {
+        margin-top: 2rem;
+        display: flex;
+        gap: .5rem;
+        padding: 0.75rem;
+        border-radius: 1rem;
+        background-color: $color-darker;
+        &-item {
+            background-color: $color-darker;
+            
+        }
+    }
+}
+
+.NavLink {
+    color: $color-lightgrey;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    &-active {
+        background-color: $color-dark;
+        color: $color-light;
+    }
+}

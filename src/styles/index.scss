@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './utilites.scss';
+
+body {
+    font-family: $font-family-main;
+    overflow-y: hidden;
+}
+
+code {
+  font-family: $font-family-mono;
+}
+
+a {
+    color: $color-lightgrey;
+}

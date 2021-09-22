@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Mono&display=swap');
+
+$font-family-main: 'Poppins', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
+
+$color-darker: #191B1F;
+$color-dark: #212429;
+$color-lightgrey: #C3C5CB;
+$color-light: #fff;
+$color-danger: #D63031;
+$color-action: #423E7A;
+$color-action-light: #363547;
+
+@mixin button {
+    cursor: pointer;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: $color-light;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

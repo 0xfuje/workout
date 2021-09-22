@@ -1,0 +1,19 @@
+@import './utilites.scss';
+
+.App {
+    aspect-ratio: 16/9;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.container {
+    overflow-y: scroll;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: $color-darker;
+    width: 25rem;
+    height: 50rem;
+}

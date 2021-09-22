@@ -1,0 +1,66 @@
+@import './utilites.scss';
+
+.Exercise {
+    margin-top: 2rem;
+    &-name {
+        color: $color-light;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    &-settings {
+        img { height: 1rem; margin-right: 0.6rem; }
+    }
+    &-grid {
+        margin-top: 0.5rem;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(4, 0.5fr) 1fr;
+        grid-template-rows: repeat(auto-fill, 2rem);
+        font-family: $font-family-mono;
+
+        &-sets {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-rows: repeat(auto-fill, 2rem);
+        }
+        &-head {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-auto-flow: column;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+    
+        &-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+            font-family: $font-family-main;
+        }
+        &-input {
+            width: 3.75rem;
+            background-color: $color-dark;
+            color: $color-lightgrey;
+            border-radius: 0.33rem;
+            text-align: end;
+        }
+        &-icons {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-direction: row;
+        }
+        &-check {
+            img { width: 1.25rem; }
+        }
+        &-delete {
+            img { height: 1.25rem; }
+        }
+    }
+    &-addSet {
+        @include button;
+    }
+}
