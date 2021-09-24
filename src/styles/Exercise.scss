@@ -1,7 +1,7 @@
 @import './utilites.scss';
 
 .Exercise {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     &-name {
         color: $color-light;
         font-size: 1rem;
@@ -11,7 +11,7 @@
         img { height: 1rem; margin-right: 0.6rem; }
     }
     &-grid {
-        margin-top: 0.5rem;
+        margin-bottom: 1rem;
         display: grid;
         gap: 0.5rem;
         grid-template-columns: repeat(4, 0.5fr) 1fr;

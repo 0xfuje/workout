@@ -6,8 +6,10 @@ import checkSolidIcon from './images/icons/check-square-solid.svg';
 import checkIcon from './images/icons/check-square-regular.svg';
 import './styles/Exercise.scss';
 
+
+
 function Exercise(props) {
-    const sets = Array(parseInt(props.sets)).fill();
+    const sets = props.sets;
     const displaySets = sets.map((s, i) => {
         return (
             <Fragment>
@@ -26,6 +28,7 @@ function Exercise(props) {
             </Fragment>
         )
     })
+    
     return (
         <div className="Exercise">
             <div className="flex">
@@ -42,7 +45,7 @@ function Exercise(props) {
                 <div className="Exercise-grid-empty"></div>
                 {displaySets}
             </div>
-            <a className='Exercise-addSet' onClick={props.addSet}>Add Set</a>
+            <a className='Exercise-addSet' onClick=''>Add Set</a>
         </div>
     )
 }

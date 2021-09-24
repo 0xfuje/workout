@@ -9,36 +9,39 @@ import './styles/App.scss';
 
 
 function App() {
-    const [presets, setPresets] = useState(
-        {
-            name: 'Bulk Routine - Fuji',
-            workouts: [
-                {
-                    name: 'Upper',
-                    frequency: 3,
-                    bodyparts: 
-                    [
-                        { name: 'Chest', sets: 3, exercies: 1},
-                        { name: 'Back', sets: 5, exercises: 2},
-                        { name: 'Biceps', sets: 5, exercies: 2},
-                        { name: 'Triceps', sets: 4, exercies: 2},
-                        { name: 'Side delt', sets: 3, exercies: 1},
-                        { name: 'Rear delt', sets: 3, exercies: 1}
-                    ]
-                },
+    const [workoutRoutines, setWorkoutRoutines] = useState(
+        [
+            {
+                name: 'Upper',
+                frequency: 3,
+                exercises: 
+                [
+                    { name: 'Chest', sets: 3 },
+                    { name: 'Vertical Pull', sets: 2},
+                    { name: 'Horizontal Pull', sets: 2},
+                    { name: 'Biceps - 1', sets: 2},
+                    { name: 'Biceps - 2', sets: 2},
+                    { name: 'Triceps - 1', sets: 2},
+                    { name: 'Triceps - 2', sets: 2},
+                    { name: 'Side delt', sets: 3 },
+                    { name: 'Rear delt', sets: 3 }
+                ]
+            },
 
-                {
-                    name: 'Lower',
-                    frequency: 2,
-                    bodyparts: 
-                    [
-                        { name: 'Quads', sets: 6, exercies: 2},
-                        { name: 'Hammstrings', sets: 5, exercies: 2},
-                        { name: 'Calves', sets: 6, exercies: 2}
-                    ]
-                }
-            ],
-        }
+            {
+                name: 'Lower',
+                frequency: 3,
+                exercises: 
+                [
+                    { name: 'Quads - 1', sets: 3},
+                    { name: 'Quads - 2', sets: 2},
+                    { name: 'Hammstrings - 1', sets: 3},
+                    { name: 'Hammstrings - 2', sets: 2},
+                    { name: 'Calves - 1', sets: 3},
+                    { name: 'Calves - 2', sets: 3}
+                ]
+            }
+        ]
     )
     const [workouts, setWorkouts] = useState(
         [
@@ -56,22 +59,48 @@ function App() {
                     { name: 'One-arm Biceps Curl', bodypart: 'Biceps', sets: ['2x10x15', '2x10x15']},
                 ],
                 scretching: true
+            },
+            {
+                date: '2021/09/22',
+                exercises: [
+                    { name: 'Leg Press', bodypart: 'Quads', sets: ['100x20', '120x12', '120x12']},
+                    { name: 'Romanian Deadlift', bodypart: 'Hammstrings', sets: ['80x13', '80x13']},
+                    { name: 'Leg Extension', bodypart: 'Quads', sets: ['27x20', '27x20']},
+                    { name: 'Hammstring Curl', bodypart: 'Hammstrings', sets: ['22x20', '22x20']},
+                    { name: 'Horizontal Calf Machine', bodypart: 'Calf', sets: ['45x20', '45x20', '45x20', '2x18x20', '2x18x20']},
+                ],
+                scretching: false
             }
 
         ]
     );
-    
-    const getExercises = workouts.map((w) => (w.exercises.map(ex => {
+    let exercisesArr = [];
+    workouts.map((w) => ([...w.exercises].map(ex => {
         const exercise = {  name: ex.name, bodypart: ex.bodypart };
-        return exercise;
+        exercisesArr.push(exercise);
     })));
-    const [exercises, setExercises] = useState(...getExercises);
+
+    const addExercise = () => {
+        
+    }
+    
+    const removeExercise = () => {
+
+    }
+    
+    const [exercises, setExercises] = useState(exercisesArr);
+
+    
     return (
         <div className='App' style={{ backgroundImage: `url(${backgroundImage})`}}>
             <NavBar />
             <div className="container">
                 <Switch>
-                    <Route exact path='/new' render={() => <WorkoutForm presets={presets} />} />
+                    <Route exact path='/new' render={() => <WorkoutForm 
+                        workoutRoutines={workoutRoutines}
+                        exercises={exercises}
+                        addExercise={addExercise}
+                        removeExercise={removeExercise} />} />
                     <Route exact path='/log' render={() => <TrainingLog />} />
                     <Route exact path='/calculator' render={() => <Calculator />} />
                     <Redirect to='/new' />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+i/* mport React, { useState, useEffect } from 'react';
 import { Fragment } from 'react/cjs/react.development';
 import { nanoid } from 'nanoid';
 
@@ -9,33 +9,36 @@ import backArrow from './images/icons/long-arrow-alt-left-solid.svg';
 import Exercise from './Exercise';
 import './styles/Exercise.scss';
 
-function WorkoutForm(props) {
-    const [currentWorkout, setCurrentWorkout] = useState('Upper');
-    const getExercises = () => {
-        return props.workoutRoutines.filter((w) => w.name === currentWorkout).map((w) => w.exercises)[0]
-    };
+function OldWorkoutForm(props) {
+    const [isWorkoutSelected, setIsWorkoutSelected] = useState(true);
+    const workoutRoutines = props.workoutRoutine.workouts;
+    const filterExercises = () => workoutRoutines.filter(w => w.name === workout)[0].bodyparts
+    .map((bp) => {
+        const id = nanoid();
+        return {name: bp.name, sets: Array(bp.sets).fill(0), id: id, key: id}
+    });
+    const [workout, setWorkout] = useState('Upper');
+    const [exercises, setExercises] = useState(filterExercises());
+    
+    
+    console.log(exercises);
+    const addSet = (id) => {
+        console.log(id)
+        const newExercise = exercises.filter((ex) => ex.id === id)[0];
+        newExercise.sets.push(0);
+        const exercisesNew = exercises.filter((ex) => ex.id !== id);
+        exercisesNew.push(newExercise);
+        console.log(exercisesNew);
+        setExercises(...exercisesNew);
+    }
+    const removeSet = (id) => {
 
-    const [workoutExercises, setWorkoutExercises] = 
-    useState(getExercises().map((ex) => 
-        ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid()})
-    ));
-    
-
-    console.log(workoutExercises);
-    
-    useEffect(() => setWorkoutExercises(getExercises().map((ex) => 
-    ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid()})
-    )), [currentWorkout]);
-    
-    
+    }
     // Event Handlers
     const handleChange = (e) => {
-        e.preventDefault();
-        setCurrentWorkout(e.target.value);
-        
+        setIsWorkoutSelected(true);
+        setWorkout(e.target.value);
     }
-    
-    
     const handleAddExercise = (e) => {
         e.preventDefault();
     }
@@ -46,12 +49,11 @@ function WorkoutForm(props) {
         e.preventDefault();
     }
 
-    const displayOptions = props.workoutRoutines.map((w) => {
-        return <option className="WorkoutForm-selector-option" value={w.name}>{w.name}</option>;
-    });
-    
-    const displayExercises = workoutExercises.map((ex) => {
-        return <Exercise name={ex.name} sets={ex.sets} id={ex.id} key={ex.id} />
+    const displayOptions = workoutRoutines.map((w) => 
+        <option className="WorkoutForm-selector-option" value={w.name}>{w.name}</option>);
+
+    const displayExercises = exercises.map((ex) => {
+        return <Exercise name={ex.name} sets={ex.sets} id={ex.id} key={ex.id} addSet={addSet} />
     });
 
     const displayButtons = 
@@ -63,6 +65,7 @@ function WorkoutForm(props) {
 
     
     return (
+        
         <div className='WorkoutForm'>
             <div className="flex">
                 <h2 className='WorkoutForm-title title'>New Workout Log</h2>
@@ -78,11 +81,12 @@ function WorkoutForm(props) {
             <select name='workout-selector' className="WorkoutForm-selector" onChange={handleChange}>
                 {displayOptions}
             </select>
-            {displayExercises}
-            {displayButtons}
+            {(isWorkoutSelected) ? displayExercises : ''}
+            {(isWorkoutSelected) ? displayButtons : ''}
            
         </div>
     )
 }
 
-export default WorkoutForm;
+export default OldWorkoutForm;
+ */

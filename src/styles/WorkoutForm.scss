@@ -9,6 +9,17 @@
     &-settings {
         img { width: 1.5rem; }
     }
+    &-icons {
+        display: flex;
+        gap: 1rem;
+    }
+    &-selector {
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        background-color: $color-dark;
+        color: $color-light;
+        border-radius: 0.33rem;
+    }
 
     &-button {
         @include button;
