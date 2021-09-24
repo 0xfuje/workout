@@ -10,31 +10,34 @@ import Exercise from './Exercise';
 import './styles/Exercise.scss';
 
 function WorkoutForm(props) {
-    const [currentWorkout, setCurrentWorkout] = useState('Upper');
     const getExercises = () => {
-        return props.workoutRoutines.filter((w) => w.name === currentWorkout).map((w) => w.exercises)[0]
+        const oldExercises =  props.workoutRoutines.filter((w) => w.name === currentWorkout).map((w) => w.exercises)[0];
+        const newExercises = oldExercises.map((ex, i) => ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid(), pos: i}));
+        return newExercises;
     };
+    const [currentWorkout, setCurrentWorkout] = useState('Upper');
+    const [exercises, setExercises] = useState(getExercises());
 
-    const [workoutExercises, setWorkoutExercises] = 
-    useState(getExercises().map((ex) => 
-        ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid()})
-    ));
+    // Set exercises on change of currentWorkout
+    useEffect(() => setExercises(getExercises()), [currentWorkout]);
+    
     
 
-    console.log(workoutExercises);
-    
-    useEffect(() => setWorkoutExercises(getExercises().map((ex) => 
-    ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid()})
-    )), [currentWorkout]);
-    
-    
+    // Functions passed down
+    const addSet = (id) => {
+        const newExercise = exercises.filter((ex) => ex.id === id)[0];
+        newExercise.sets.push(0);
+        const exercisesNew = exercises.filter((ex) => ex.id !== id);
+        exercisesNew.push(newExercise);
+        exercisesNew.sort((a, b) =>  a.pos - b.pos);
+        setExercises(exercisesNew);
+    }
+
     // Event Handlers
     const handleChange = (e) => {
         e.preventDefault();
         setCurrentWorkout(e.target.value);
-        
     }
-    
     
     const handleAddExercise = (e) => {
         e.preventDefault();
@@ -46,14 +49,13 @@ function WorkoutForm(props) {
         e.preventDefault();
     }
 
+    // Display variables
     const displayOptions = props.workoutRoutines.map((w) => {
         return <option className="WorkoutForm-selector-option" value={w.name}>{w.name}</option>;
     });
-    
-    const displayExercises = workoutExercises.map((ex) => {
-        return <Exercise name={ex.name} sets={ex.sets} id={ex.id} key={ex.id} />
+    const displayExercises = exercises.map((ex) => {
+        return <Exercise name={ex.name} sets={ex.sets} id={ex.id} key={ex.id} pos={ex.pos} addSet={addSet}/>
     });
-
     const displayButtons = 
     <Fragment>
         <a onClick={handleAddExercise} className="WorkoutForm-button WorkoutForm-addExercise">add exercise</a>

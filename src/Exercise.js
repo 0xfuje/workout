@@ -9,6 +9,9 @@ import './styles/Exercise.scss';
 
 
 function Exercise(props) {
+    const handleAddSet = () => {
+        props.addSet(props.id);
+    }
     const sets = props.sets;
     const displaySets = sets.map((s, i) => {
         return (
@@ -45,7 +48,7 @@ function Exercise(props) {
                 <div className="Exercise-grid-empty"></div>
                 {displaySets}
             </div>
-            <a className='Exercise-addSet' onClick=''>Add Set</a>
+            <a className='Exercise-addSet' onClick={handleAddSet}>Add Set</a>
         </div>
     )
 }
