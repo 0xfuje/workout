@@ -32,13 +32,21 @@ function WorkoutForm(props) {
         exercisesNew.sort((a, b) =>  a.pos - b.pos);
         setExercises(exercisesNew);
     }
+    const removeSet = () => {
+
+    }
+    const replaceEx = () => {
+
+    }
+    const removeEx = () => {
+
+    }
 
     // Event Handlers
     const handleChange = (e) => {
         e.preventDefault();
         setCurrentWorkout(e.target.value);
     }
-    
     const handleAddExercise = (e) => {
         e.preventDefault();
     }
@@ -54,7 +62,17 @@ function WorkoutForm(props) {
         return <option className="WorkoutForm-selector-option" value={w.name}>{w.name}</option>;
     });
     const displayExercises = exercises.map((ex) => {
-        return <Exercise name={ex.name} sets={ex.sets} id={ex.id} key={ex.id} pos={ex.pos} addSet={addSet}/>
+        return <Exercise 
+            name={ex.name} 
+            sets={ex.sets}
+            id={ex.id} 
+            key={ex.id} 
+            pos={ex.pos} 
+            addSet={addSet}
+            removeSet={removeSet}
+            replaceEx={replaceEx}
+            removeEx={removeEx}
+        />
     });
     const displayButtons = 
     <Fragment>

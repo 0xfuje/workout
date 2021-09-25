@@ -12,23 +12,29 @@ function Exercise(props) {
     const handleAddSet = () => {
         props.addSet(props.id);
     }
+    const handleCheck = () => {
+
+    }
+    const handleDeleteSet = () => {
+
+    }
     const sets = props.sets;
     const displaySets = sets.map((s, i) => {
         return (
-            <Fragment>
+            <div className='Exercise-grid-set'>
                 <p className='Exercise-grid-number'>{i+1}</p>
                 <input className='Exercise-grid-input input' type="number" min="0" max="999"/>
                 <input className='Exercise-grid-input input' type="number" min="0" max="50"/>
                     <input className='Exercise-grid-input input' type="number" min="0" max="10"/>
                 <div className="Exercise-grid-icons">
-                    <a href='/new' className="Exercise-grid-check">
+                    <a onClick={handleCheck} className="Exercise-grid-check">
                         <img src={checkSolidIcon} alt="checkmark" />
                     </a>
-                    <a href='/new' className="Exercise-grid-delete">
+                    <a onClick={handleDeleteSet} className="Exercise-grid-delete">
                         <img src={trashCanIcon} alt="checkmark" />
                     </a>
                 </div>
-            </Fragment>
+            </div>
         )
     })
     
@@ -41,12 +47,16 @@ function Exercise(props) {
                 </a>
             </div>
             <div className="Exercise-grid">
-                <p className='Exercise-grid-head'>set</p>
-                <p className='Exercise-grid-head'>kg</p>
-                <p className='Exercise-grid-head'>reps</p>
-                <p className='Exercise-grid-head'>rpe</p>
-                <div className="Exercise-grid-empty"></div>
-                {displaySets}
+                <div className='Exercise-grid-head'>
+                    <p className='Exercise-grid-head-item Exercise-grid-head-item-sets'>sets</p>
+                    <p className='Exercise-grid-head-item'>kg</p>
+                    <p className='Exercise-grid-head-item'>reps</p>
+                    <p className='Exercise-grid-head-item'>rpe</p>
+                    <div className='Exercise-grid-head-item'></div>
+                </div>
+                <div className="Exercise-grid-sets">
+                    {displaySets}
+                </div>
             </div>
             <a className='Exercise-addSet' onClick={handleAddSet}>Add Set</a>
         </div>
