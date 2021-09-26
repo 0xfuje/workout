@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react/cjs/react.development';
 import ellipsisSettingsIcon from './images/icons/ellipsis-v-solid.svg';
 import trashCanIcon from './images/icons/trash-solid.svg';
@@ -9,25 +9,25 @@ import './styles/Exercise.scss';
 
 
 function Exercise(props) {
+    const [sets, setSets] = useState(props.sets);
     const handleAddSet = () => {
         props.addSet(props.id);
     }
-    const handleCheck = () => {
-
+    const handleDoneSet = () => {
+        props.doneSet(props.id);
     }
     const handleDeleteSet = () => {
 
     }
-    const sets = props.sets;
-    const displaySets = sets.map((s, i) => {
+    const displaySets = props.sets.map((s, i) => {
         return (
-            <div className='Exercise-grid-set'>
+            <div className={`Exercise-grid-set Exercise-grid-set-${i}`}>
                 <p className='Exercise-grid-number'>{i+1}</p>
-                <input className='Exercise-grid-input input' type="number" min="0" max="999"/>
-                <input className='Exercise-grid-input input' type="number" min="0" max="50"/>
-                    <input className='Exercise-grid-input input' type="number" min="0" max="10"/>
+                <input name='weight' className='Exercise-grid-input input' type="number" min="0" max="999"/>
+                <input name='reps' className='Exercise-grid-input input' type="number" min="0" max="50"/>
+                <input name='rpe' className='Exercise-grid-input input' type="number" min="0" max="10"/>
                 <div className="Exercise-grid-icons">
-                    <a onClick={handleCheck} className="Exercise-grid-check">
+                    <a onClick={handleDoneSet} className="Exercise-grid-check">
                         <img src={checkSolidIcon} alt="checkmark" />
                     </a>
                     <a onClick={handleDeleteSet} className="Exercise-grid-delete">
@@ -39,7 +39,7 @@ function Exercise(props) {
     })
     
     return (
-        <div className="Exercise">
+        <div className={`Exercise Exercise-${props.pos}`}>
             <div className="flex">
                 <h2 className='Exercise-name'>{props.name}</h2>
                 <a href="/new" className="Exercise-settings">

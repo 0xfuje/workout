@@ -12,7 +12,9 @@ import './styles/Exercise.scss';
 function WorkoutForm(props) {
     const getExercises = () => {
         const oldExercises =  props.workoutRoutines.filter((w) => w.name === currentWorkout).map((w) => w.exercises)[0];
-        const newExercises = oldExercises.map((ex, i) => ({ name: ex.name, sets: Array(ex.sets).fill(0), id: nanoid(), pos: i}));
+        const newExercises = oldExercises.map((ex, i) => (
+            { name: ex.name, sets: Array(ex.sets).fill({weight: 0, reps: 0, rpe: 0}), id: nanoid(), pos: i}
+        ));
         return newExercises;
     };
     const [currentWorkout, setCurrentWorkout] = useState('Upper');
@@ -31,6 +33,10 @@ function WorkoutForm(props) {
         exercisesNew.push(newExercise);
         exercisesNew.sort((a, b) =>  a.pos - b.pos);
         setExercises(exercisesNew);
+    }
+    const doneSet = (id) => {
+        const exercise = exercises.filter((ex) => ex.id === id)[0];
+        console.log(exercise);
     }
     const removeSet = () => {
 
@@ -69,6 +75,7 @@ function WorkoutForm(props) {
             key={ex.id} 
             pos={ex.pos} 
             addSet={addSet}
+            doneSet={doneSet}
             removeSet={removeSet}
             replaceEx={replaceEx}
             removeEx={removeEx}

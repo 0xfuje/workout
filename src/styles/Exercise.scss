@@ -40,7 +40,12 @@
             grid-template-columns: repeat(4, 0.5fr) 1fr;
             gap: 0.5rem;
         }
-        
+        &-set--0 {
+            background-color: $color-action-light;
+            .input {
+                background-color: $color-action-light;
+            }
+        }
     
         &-number {
             display: flex;
@@ -50,6 +55,8 @@
             font-family: $font-family-main;
         }
         &-input {
+            font-family: $font-family-mono;
+            font-size: 0.75rem;
             width: 3.75rem;
             background-color: $color-dark;
             color: $color-lightgrey;
@@ -64,9 +71,11 @@
             flex-direction: row;
         }
         &-check {
+            cursor: pointer;
             img { width: 1.25rem; }
         }
         &-delete {
+            cursor: pointer;
             img { height: 1.25rem; }
         }
     }
