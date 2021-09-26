@@ -26,21 +26,6 @@ function WorkoutForm(props) {
     
 
     // Functions passed down
-    const addSet = (id) => {
-        const newExercise = exercises.filter((ex) => ex.id === id)[0];
-        newExercise.sets.push(0);
-        const exercisesNew = exercises.filter((ex) => ex.id !== id);
-        exercisesNew.push(newExercise);
-        exercisesNew.sort((a, b) =>  a.pos - b.pos);
-        setExercises(exercisesNew);
-    }
-    const doneSet = (id) => {
-        const exercise = exercises.filter((ex) => ex.id === id)[0];
-        console.log(exercise);
-    }
-    const removeSet = () => {
-
-    }
     const replaceEx = () => {
 
     }
@@ -73,10 +58,7 @@ function WorkoutForm(props) {
             sets={ex.sets}
             id={ex.id} 
             key={ex.id} 
-            pos={ex.pos} 
-            addSet={addSet}
-            doneSet={doneSet}
-            removeSet={removeSet}
+            pos={ex.pos}
             replaceEx={replaceEx}
             removeEx={removeEx}
         />

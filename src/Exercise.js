@@ -1,43 +1,31 @@
-import React, { useState } from 'react';
-import { Fragment } from 'react/cjs/react.development';
+import React, { useEffect, useState } from 'react';
+import Set from './Set';
+import { nanoid } from 'nanoid';
 import ellipsisSettingsIcon from './images/icons/ellipsis-v-solid.svg';
-import trashCanIcon from './images/icons/trash-solid.svg';
-import checkSolidIcon from './images/icons/check-square-solid.svg';
-import checkIcon from './images/icons/check-square-regular.svg';
 import './styles/Exercise.scss';
 
 
 
 function Exercise(props) {
-    const [sets, setSets] = useState(props.sets);
-    const handleAddSet = () => {
-        props.addSet(props.id);
+    const oldSets = props.sets;
+    const newSets = () => oldSets.map((set, i) => ( {...set, id: nanoid()} ));
+    const [sets, setSets] = useState(newSets);
+    const [setsAdded, setSetsAdded] = useState(0);
+    const addSet = () => {
+        oldSets.push({weight: 0, reps: 0, rpe: 0});
+        setSetsAdded(setsAdded + 1);
     }
-    const handleDoneSet = () => {
-        props.doneSet(props.id);
-    }
-    const handleDeleteSet = () => {
+    useEffect(() => setSets(newSets()), [setsAdded]);
 
-    }
-    const displaySets = props.sets.map((s, i) => {
+
+    const displaySets = sets.map((s, i) => {
         return (
-            <div className={`Exercise-grid-set Exercise-grid-set-${i}`}>
-                <p className='Exercise-grid-number'>{i+1}</p>
-                <input name='weight' className='Exercise-grid-input input' type="number" min="0" max="999"/>
-                <input name='reps' className='Exercise-grid-input input' type="number" min="0" max="50"/>
-                <input name='rpe' className='Exercise-grid-input input' type="number" min="0" max="10"/>
-                <div className="Exercise-grid-icons">
-                    <a onClick={handleDoneSet} className="Exercise-grid-check">
-                        <img src={checkSolidIcon} alt="checkmark" />
-                    </a>
-                    <a onClick={handleDeleteSet} className="Exercise-grid-delete">
-                        <img src={trashCanIcon} alt="checkmark" />
-                    </a>
-                </div>
-            </div>
+            <Set num={i} key={s.id} id={s.id} />
         )
     })
     
+    
+
     return (
         <div className={`Exercise Exercise-${props.pos}`}>
             <div className="flex">
@@ -58,7 +46,7 @@ function Exercise(props) {
                     {displaySets}
                 </div>
             </div>
-            <a className='Exercise-addSet' onClick={handleAddSet}>Add Set</a>
+            <a className='Exercise-addSet' onClick={addSet}>Add Set</a>
         </div>
     )
 }
