@@ -10,17 +10,38 @@ function Exercise(props) {
     const oldSets = props.sets;
     const newSets = () => oldSets.map((set, i) => ( {...set, id: nanoid()} ));
     const [sets, setSets] = useState(newSets);
-    const [setsAdded, setSetsAdded] = useState(0);
+    const [plusSets, setPlusSets] = useState(0);
+    
+    useEffect(() => setSets(newSets()), [plusSets]);
+    
     const addSet = () => {
         oldSets.push({weight: 0, reps: 0, rpe: 0});
-        setSetsAdded(setsAdded + 1);
+        setPlusSets(plusSets + 1);
     }
-    useEffect(() => setSets(newSets()), [setsAdded]);
 
+    const checkSet = (pos, setData) => {
+        const [weight, reps, rpe] = setData;
+        oldSets[pos] = {weight, reps, rpe};
+        setPlusSets(plusSets + 1);
+    }
+
+    const deleteSet = (pos) => {
+        oldSets.splice(pos, 1);
+        setPlusSets(plusSets - 1);
+    }
 
     const displaySets = sets.map((s, i) => {
         return (
-            <Set num={i} key={s.id} id={s.id} />
+            <Set
+                weight={s.weight}
+                reps={s.reps}
+                rpe={s.rpe}
+                pos={i} 
+                key={s.id} 
+                id={s.id}
+                checkSet={checkSet}
+                deleteSet={deleteSet}
+            />
         )
     })
     

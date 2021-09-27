@@ -17,12 +17,12 @@ function App() {
                 exercises: 
                 [
                     { name: 'Chest', sets: 3 },
-                    { name: 'Vertical Pull', sets: 2},
+                    { name: 'Vertical Pull', sets: 3},
                     { name: 'Horizontal Pull', sets: 2},
-                    { name: 'Biceps - 1', sets: 2},
-                    { name: 'Biceps - 2', sets: 2},
-                    { name: 'Triceps - 1', sets: 2},
-                    { name: 'Triceps - 2', sets: 2},
+                    { name: 'Biceps - 1', sets: 3 },
+                    { name: 'Biceps - 2', sets: 3 },
+                    { name: 'Triceps - 1', sets: 2 },
+                    { name: 'Triceps - 2', sets: 2 },
                     { name: 'Side delt', sets: 3 },
                     { name: 'Rear delt', sets: 3 }
                 ]
@@ -34,11 +34,12 @@ function App() {
                 exercises: 
                 [
                     { name: 'Quads - 1', sets: 3},
-                    { name: 'Quads - 2', sets: 2},
+                    { name: 'Quads - 2', sets: 3},
                     { name: 'Hammstrings - 1', sets: 3},
-                    { name: 'Hammstrings - 2', sets: 2},
+                    { name: 'Hammstrings - 2', sets: 3},
                     { name: 'Calves - 1', sets: 3},
-                    { name: 'Calves - 2', sets: 3}
+                    { name: 'Calves - 2', sets: 3},
+                    { name: 'Calves - 3', sets: 2}
                 ]
             }
         ]
