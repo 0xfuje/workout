@@ -17,59 +17,88 @@ function WorkoutForm(props) {
         ));
         return newExercises;
     };
+
+    // States
     const [currentWorkout, setCurrentWorkout] = useState('Upper');
     const [exercises, setExercises] = useState(getExercises());
+    const [showNewExInput, setShowNexExInput] = useState(false);
+    const [newEx, setNewEx] = useState();
 
     // Set exercises on change of currentWorkout
     useEffect(() => setExercises(getExercises()), [currentWorkout]);
     
-    
-
     // Functions passed down
-    const replaceEx = () => {
-
+    const renameEx = (id, newName) => {
+        const exToRename = exercises.filter(ex => ex.id === id)[0];
+        const newExercises = exercises.filter(ex => ex.id !== id);
+        exToRename.name = newName;
+        newExercises.push(exToRename);
+        newExercises.sort((a, b) => a.pos - b.pos);
+        setExercises(newExercises);
     }
-    const removeEx = () => {
-
+    const replaceEx = (id) => {
+        const exToReplace = exercises.filter(ex => ex.id === id)[0];
+    }
+    const removeEx = (id) => {
+        const newExercises = exercises.filter(ex => ex.id !== id);
+        setExercises(newExercises);
     }
 
     // Event Handlers
-    const handleChange = (e) => {
-        e.preventDefault();
+    const handleChange = (e) => { 
         setCurrentWorkout(e.target.value);
     }
-    const handleAddExercise = (e) => {
-        e.preventDefault();
+    const handleShowNewExInput = (e) => {
+        setShowNexExInput(!showNewExInput)
+    }
+    const handleAddExercise = () => {
+        if (!newEx) return;
+        const addEx = {name: newEx, sets: Array(3).fill({weight: 0, reps: 0, rpe: 0}), id: nanoid(), pos: exercises.length};
+        const newExercises = [...exercises, addEx];
+        setExercises(newExercises);
+        setShowNexExInput(false);
+    }
+    const handleNewExChange = (e) => {
+        setNewEx(e.target.value);
     }
     const handleCancelWorkout = (e) => {
-        e.preventDefault();
+        
     }
     const handleFinishWorkout = (e) => {
-        e.preventDefault();
     }
 
     // Display variables
     const displayOptions = props.workoutRoutines.map((w) => {
         return <option className="WorkoutForm-selector-option" value={w.name}>{w.name}</option>;
     });
+    
     const displayExercises = exercises.map((ex) => {
-        return <Exercise 
+        return (
+        <Exercise 
             name={ex.name} 
             sets={ex.sets}
             id={ex.id} 
             key={ex.id} 
             pos={ex.pos}
+            renameEx={renameEx}
             replaceEx={replaceEx}
             removeEx={removeEx}
-        />
+        />)
     });
+
     const displayButtons = 
     <Fragment>
-        <a onClick={handleAddExercise} className="WorkoutForm-button WorkoutForm-addExercise">add exercise</a>
+        {(!showNewExInput) ? <a onClick={handleShowNewExInput} className="WorkoutForm-button WorkoutForm-addExercise">add exercise</a> : ''}
         <a onClick={handleCancelWorkout} className="WorkoutForm-button WorkoutForm-cancelWorkout">cancel workout</a>
         <a onClick={handleFinishWorkout} className="WorkoutForm-button WorkoutForm-finishWorkout">finish workout</a>
     </Fragment>
 
+    const displayNewExInput = 
+    <div className="WorkoutForm-newEx">
+        <input className='WorkoutForm-newEx-input input' onChange={handleNewExChange} placeholder='New Exercise Name'/>
+        <a className='WorkoutForm-newEx-button-add button' onClick={handleAddExercise}>Add New Exercise</a>
+        <a className='WorkoutForm-newEx-button-cancel button' onClick={handleShowNewExInput}>Cancel New Exercise</a>
+    </div>
     
     return (
         <div className='WorkoutForm'>
@@ -88,6 +117,7 @@ function WorkoutForm(props) {
                 {displayOptions}
             </select>
             {displayExercises}
+            {(showNewExInput) ? displayNewExInput : ''}
             {displayButtons}
            
         </div>

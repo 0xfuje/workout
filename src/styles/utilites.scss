@@ -28,6 +28,19 @@ $color-action-light: #363547;
     }
 }
 
+@mixin input {
+    background-color: $color-dark;
+    color: $color-light;
+    border-radius: 0.33rem;
+}
+
+@mixin selector {
+    padding: 0.25rem 0.5rem;
+    background-color: $color-dark;
+    color: $color-light;
+    border-radius: 0.33rem;
+}
+
 .title {
     font-size: 1.5rem;
     font-weight: 500;

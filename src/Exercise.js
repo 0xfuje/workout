@@ -7,29 +7,62 @@ import './styles/Exercise.scss';
 
 
 function Exercise(props) {
+    // Sets logic
     const oldSets = props.sets;
     const newSets = () => oldSets.map((set, i) => ( {...set, id: nanoid()} ));
+
+    // Set states
     const [sets, setSets] = useState(newSets);
     const [plusSets, setPlusSets] = useState(0);
+
+    // Setting states
+    const [isSettingsDisplayed, setIsSettingsDisplayed] = useState(false);
+    const [isRenameDisplayed, setIsRenameDisplayed] = useState(false);
+    const [isReplaceDisplayed, setIsReplaceDisplayed] = useState(false);
+    const [rename, setRename] = useState();
     
     useEffect(() => setSets(newSets()), [plusSets]);
     
+    // Functions in this comp - Handling functions
+    const handleAddSet = () => {
+        addSet();
+    }
+    const handleSettingsClick = () => {
+        setIsSettingsDisplayed(!isSettingsDisplayed);
+    }
+    const handleSettingsChange = (e) => {
+        if (e.target.value === 'rename') setIsRenameDisplayed(true);
+        if (e.target.value === 'replace');
+        if (e.target.value === 'remove') props.removeEx(props.id);
+        setIsSettingsDisplayed(false);
+    }
+    const handleRenameChange = (e) => {
+        setRename(e.target.value);
+    }
+    
+    const handleRenameClick = (e) => {
+        props.renameEx(props.id, rename);
+        setIsRenameDisplayed(false);
+    }
+
+    // Functions in this comp
     const addSet = () => {
         oldSets.push({weight: 0, reps: 0, rpe: 0});
         setPlusSets(plusSets + 1);
     }
 
+    // Functions passed down
     const checkSet = (pos, setData) => {
         const [weight, reps, rpe] = setData;
         oldSets[pos] = {weight, reps, rpe};
         setPlusSets(plusSets + 1);
     }
-
     const deleteSet = (pos) => {
         oldSets.splice(pos, 1);
         setPlusSets(plusSets - 1);
     }
 
+    // Display variables
     const displaySets = sets.map((s, i) => {
         return (
             <Set
@@ -44,17 +77,30 @@ function Exercise(props) {
             />
         )
     })
-    
-    
 
+    const displayExSettings = 
+    <select className='Exercise-settings-selector' onChange={handleSettingsChange}>
+        <option className='Exercise-settings-selector-option' value="none">Select One 🠗</option>
+        <option className='Exercise-settings-selector-option' value="rename">Rename Exercise</option>
+        <option className='Exercise-settings-selector-option' value="replace">Replace Exercise</option>
+        <option className='Exercise-settings-selector-option' value="remove">Remove Exercise</option>
+    </select>
+
+    const displayRename = 
+    <div className="Exercise-settings-rename">
+        <input className='Exercise-settings-rename-input input' onChange={handleRenameChange} placeholder='New Name'/>
+        <a className='Exercise-settings-rename-button button' onClick={handleRenameClick}>Rename</a>
+    </div>
+    
+    
     return (
         <div className={`Exercise Exercise-${props.pos}`}>
             <div className="flex">
                 <h2 className='Exercise-name'>{props.name}</h2>
-                <a href="/new" className="Exercise-settings">
-                    <img src={ellipsisSettingsIcon} alt="Exercise settings" />
-                </a>
+                <img src={ellipsisSettingsIcon} onClick={handleSettingsClick} className="Exercise-settings" alt="Exercise settings"/>
             </div>
+            {isSettingsDisplayed ? displayExSettings : ''}
+            {isRenameDisplayed ? displayRename : ''}
             <div className="Exercise-grid">
                 <div className='Exercise-grid-head'>
                     <p className='Exercise-grid-head-item Exercise-grid-head-item-sets'>sets</p>
@@ -67,7 +113,7 @@ function Exercise(props) {
                     {displaySets}
                 </div>
             </div>
-            <a className='Exercise-addSet' onClick={addSet}>Add Set</a>
+            <a className='Exercise-addSet' onClick={handleAddSet}>Add Set</a>
         </div>
     )
 }

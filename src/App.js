@@ -16,11 +16,11 @@ function App() {
                 frequency: 3,
                 exercises: 
                 [
-                    { name: 'Chest', sets: 3 },
+                    { name: 'Chest', sets: 4 },
                     { name: 'Vertical Pull', sets: 3},
                     { name: 'Horizontal Pull', sets: 2},
                     { name: 'Biceps - 1', sets: 3 },
-                    { name: 'Biceps - 2', sets: 3 },
+                    { name: 'Biceps - 2', sets: 2 },
                     { name: 'Triceps - 1', sets: 2 },
                     { name: 'Triceps - 2', sets: 2 },
                     { name: 'Side delt', sets: 3 },

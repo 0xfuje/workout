@@ -24,9 +24,15 @@ function Set(props) {
     return (
         <div className={`Set Set-${props.pos}`}>
             <p className='Set-number'>{props.pos+1}</p>
-            <input placeholder={(props.weight === 0) ? '' : props.weight} name='weight' onChange={handleWeightChange} className='Set-input input' type="number" min="0" max="999"/>
-            <input placeholder={(props.reps === 0) ? '' : props.reps} name='reps' onChange={handleRepsChange} className='Set-input input' type="number" min="0" max="50"/>
-            <input placeholder={(props.rpe === 0) ? '' : props.rpe} name='rpe' onChange={handleRpeChange} className='Set-input input' type="number" min="0" max="10"/>
+            <input placeholder={(props.weight === 0) ? '' : props.weight} name='weight' 
+                onChange={handleWeightChange} className='Set-input input' type="number" min="0" max="999"
+            />
+            <input placeholder={(props.reps === 0) ? '' : props.reps} name='reps'
+                onChange={handleRepsChange} className='Set-input input' type="number" min="0" max="50"
+            />
+            <input placeholder={(props.rpe === 0) ? '' : props.rpe} name='rpe'
+                onChange={handleRpeChange} className='Set-input input' type="number" min="0" max="10"
+            />
             <div className="Set-icons">
                 <a onClick={handleCheckSet} className="Set-check">
                     <img src={checkSolidIcon} alt="checkmark" />

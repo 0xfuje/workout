@@ -16,12 +16,10 @@
         font-family: $font-family-main;
     }
     &-input {
+        @include input;
         font-family: $font-family-mono;
         font-size: 0.75rem;
         width: 3.75rem;
-        background-color: $color-dark;
-        color: $color-lightgrey;
-        border-radius: 0.33rem;
         text-align: end;
     }
     &-icons {
