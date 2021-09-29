@@ -65,7 +65,11 @@ function WorkoutForm(props) {
         
     }
     const handleFinishWorkout = (e) => {
-    }
+        const today = new Date();
+        const date = `${today.getFullYear()}/${today.getMonth()}/${today.getDate()}`;
+        props.logWorkout(date, exercises);
+       
+    } 
 
     // Display variables
     const displayOptions = props.workoutRoutines.map((w) => {
@@ -99,6 +103,8 @@ function WorkoutForm(props) {
         <a className='WorkoutForm-newEx-button-add button' onClick={handleAddExercise}>Add New Exercise</a>
         <a className='WorkoutForm-newEx-button-cancel button' onClick={handleShowNewExInput}>Cancel New Exercise</a>
     </div>
+    
+    
     
     return (
         <div className='WorkoutForm'>

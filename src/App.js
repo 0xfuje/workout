@@ -44,7 +44,7 @@ function App() {
             }
         ]
     )
-    const [workouts, setWorkouts] = useState(
+    const [workoutLog, setWorkoutLog] = useState(
         [
             {
                 date: '2021/09/21',
@@ -58,8 +58,7 @@ function App() {
                     { name: 'Cable Triceps Extension', bodypart: 'Triceps', sets: ['35x12', '40x8', '30x15']},
                     { name: 'Seated EZ Bar Curl', bodypart: 'Biceps', sets: ['25x15', '32.5x8', '32.5x7']},
                     { name: 'One-arm Biceps Curl', bodypart: 'Biceps', sets: ['2x10x15', '2x10x15']},
-                ],
-                scretching: true
+                ]
             },
             {
                 date: '2021/09/22',
@@ -69,29 +68,30 @@ function App() {
                     { name: 'Leg Extension', bodypart: 'Quads', sets: ['27x20', '27x20']},
                     { name: 'Hammstring Curl', bodypart: 'Hammstrings', sets: ['22x20', '22x20']},
                     { name: 'Horizontal Calf Machine', bodypart: 'Calf', sets: ['45x20', '45x20', '45x20', '2x18x20', '2x18x20']},
-                ],
-                scretching: false
+                ]
             }
 
         ]
     );
-    let exercisesArr = [];
-    workouts.map((w) => ([...w.exercises].map(ex => {
+    /* let exercisesArr = [];
+    workoutLog.map((w) => ([...w.exercises].map(ex => {
         const exercise = {  name: ex.name, bodypart: ex.bodypart };
         exercisesArr.push(exercise);
     })));
-
-    const addExercise = () => {
-        
-    }
-    
-    const removeExercise = () => {
-
-    }
-    
     const [exercises, setExercises] = useState(exercisesArr);
+    */
 
     
+    
+
+    const logWorkout = (workout, date) => {
+        setWorkoutLog([...workoutLog, 
+        {
+            date: date,
+            exercises: workout
+        }])
+    }
+
     return (
         <div className='App' style={{ backgroundImage: `url(${backgroundImage})`}}>
             <NavBar />
@@ -99,9 +99,8 @@ function App() {
                 <Switch>
                     <Route exact path='/new' render={() => <WorkoutForm 
                         workoutRoutines={workoutRoutines}
-                        exercises={exercises}
-                        addExercise={addExercise}
-                        removeExercise={removeExercise} />} />
+                        logWorkout={logWorkout}
+                        />} />
                     <Route exact path='/log' render={() => <TrainingLog />} />
                     <Route exact path='/calculator' render={() => <Calculator />} />
                     <Redirect to='/new' />
