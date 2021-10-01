@@ -22,13 +22,16 @@
         &-rename {
             margin-top: 0.25rem;
             &-input {
+                margin-bottom: 0.25rem;
                 padding: 0.25rem 0.5rem;
                 color: $color-light;
             }
         }
+        &-bodypart {
+            @include selector;
+        }
     }
     &-grid {
-        
         &-head {
             display: grid;
             grid-template-columns: repeat(4, 0.5fr) 1fr;

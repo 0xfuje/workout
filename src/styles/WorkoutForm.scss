@@ -3,6 +3,8 @@
 .WorkoutForm {
     color: $color-lightgrey;
     margin-bottom: 10rem;
+    @include icons;
+
     &-title {
         color: $color-light;
     }

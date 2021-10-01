@@ -15,10 +15,15 @@ function Exercise(props) {
     const [sets, setSets] = useState(newSets);
     const [plusSets, setPlusSets] = useState(oldSets.length);
 
-    // Setting states
+    // Showing settings via state
     const [isSettingsDisplayed, setIsSettingsDisplayed] = useState(false);
     const [isRenameDisplayed, setIsRenameDisplayed] = useState(false);
+    const [isBodypartDisplayed, setIsBodypartDisplayed] = useState(false);
+
+    // Rename and new bodypart
     const [rename, setRename] = useState();
+    const [bodypart, setBodypart] = useState(props.name);
+
     
     useEffect(() => setSets(newSets()), [plusSets]);
     if (plusSets === 0)  props.removeEx(props.id);
@@ -32,13 +37,17 @@ function Exercise(props) {
     }
     const handleSettingsChange = (e) => {
         if (e.target.value === 'rename') setIsRenameDisplayed(true);
+        if (e.target.value === 'bodypart') setIsBodypartDisplayed(true);
         if (e.target.value === 'remove') props.removeEx(props.id);
         setIsSettingsDisplayed(false);
     }
     const handleRenameChange = (e) => {
         setRename(e.target.value);
     }
-    
+    const handleBodypartChange = (e) => {
+        setBodypart(e.target.value);
+        setIsBodypartDisplayed(false);
+    }
     const handleRenameClick = (e) => {
         props.renameEx(props.id, rename);
         setIsRenameDisplayed(false);
@@ -54,7 +63,7 @@ function Exercise(props) {
     const checkSet = (pos, setData) => {
         const [weight, reps, rpe] = setData;
         oldSets[pos] = {weight, reps, rpe};
-        setPlusSets(plusSets + 1);
+        setPlusSets(plusSets + '');
     }
     const deleteSet = (pos) => {
         oldSets.splice(pos, 1);
@@ -82,6 +91,7 @@ function Exercise(props) {
         <option className='Exercise-settings-selector-option' value="none">Select One 🠗</option>
         <option className='Exercise-settings-selector-option' value="rename">Rename Exercise</option>
         <option className='Exercise-settings-selector-option' value="remove">Remove Exercise</option>
+        <option className='Exercise-settings-selector-option' value="bodypart">Change Bodypart</option>
     </select>
 
     const displayRename = 
@@ -90,7 +100,13 @@ function Exercise(props) {
         <span className='Exercise-settings-rename-button button' onClick={handleRenameClick}>Rename</span>
     </div>
     
-    
+    const displayBodypartChange =
+    <select className="Exercise-settings-bodypart" onChange={handleBodypartChange}>
+        {props.bodyparts.map((bp) => {
+            return <option className='Exercise-settings-bodypart-option' value={bp}>{bp}</option>
+        })}
+    </select>
+
     return (
         <div className={`Exercise Exercise-${props.pos}`}>
             <div className="flex">
@@ -99,6 +115,7 @@ function Exercise(props) {
             </div>
             {isSettingsDisplayed ? displayExSettings : ''}
             {isRenameDisplayed ? displayRename : ''}
+            {isBodypartDisplayed ? displayBodypartChange : ''}
             <div className="Exercise-grid">
                 <div className='Exercise-grid-head'>
                     <p className='Exercise-grid-head-item Exercise-grid-head-item-sets'>sets</p>

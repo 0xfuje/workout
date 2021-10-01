@@ -21,9 +21,11 @@ function WorkoutForm(props) {
     // States
     const [currentWorkout, setCurrentWorkout] = useState('Upper');
     const [exercises, setExercises] = useState(getExercises());
+    const [bodyparts, setBodyparts] = useState([...new Set (getExercises().map(ex => ex.name))]);
     const [showNewExInput, setShowNexExInput] = useState(false);
     const [newEx, setNewEx] = useState();
 
+    
     // Set exercises on change of currentWorkout
     useEffect(() => setExercises(getExercises()), [currentWorkout]);
     
@@ -75,7 +77,8 @@ function WorkoutForm(props) {
     const displayExercises = exercises.map((ex) => {
         return (
         <Exercise 
-            name={ex.name} 
+            name={ex.name}
+            bodyparts={bodyparts}
             sets={ex.sets}
             id={ex.id} 
             key={ex.id} 
@@ -106,12 +109,12 @@ function WorkoutForm(props) {
             <div className="flex">
                 <h2 className='WorkoutForm-title title'>New Workout Log</h2>
                 <div className="WorkoutForm-icons">
-                <a href='/new' className='WorkoutForm-settings'>
-                    <img src={backArrow} alt="settings" />
-                </a>
-                <a href='/new' className='WorkoutForm-settings'>
-                    <img src={settingsIcon} alt="settings" />
-                </a>
+                    <a href='/new' className='WorkoutForm-settings'>
+                        <img src={backArrow} className='WorkoutForm-icon' alt="settings" />
+                    </a>
+                    <a href='/new' className='WorkoutForm-settings'>
+                        <img src={settingsIcon} className='WorkoutForm-icon' alt="settings" />
+                    </a>
                 </div>
             </div>
             <select name='workout-selector' className="WorkoutForm-selector" onChange={handleChange}>

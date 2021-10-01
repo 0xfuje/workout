@@ -17,13 +17,13 @@ function App() {
                 frequency: 3,
                 exercises: 
                 [
-                    { name: 'Chest', sets: 4 },
-                    { name: 'Vertical Pull', sets: 3},
-                    { name: 'Horizontal Pull', sets: 2},
-                    { name: 'Biceps - 1', sets: 3 },
-                    { name: 'Biceps - 2', sets: 2 },
-                    { name: 'Triceps - 1', sets: 2 },
-                    { name: 'Triceps - 2', sets: 2 },
+                    { name: 'Chest', sets: 3 },
+                    { name: 'Chest', sets: 2 },
+                    { name: 'Back', sets: 3},
+                    { name: 'Back', sets: 2},
+                    { name: 'Biceps', sets: 3 },
+                    { name: 'Triceps', sets: 3 },
+                    { name: 'Biceps', sets: 2 },
                     { name: 'Side delt', sets: 3 },
                     { name: 'Rear delt', sets: 3 }
                 ]
@@ -34,13 +34,13 @@ function App() {
                 frequency: 3,
                 exercises: 
                 [
-                    { name: 'Quads - 1', sets: 3},
-                    { name: 'Quads - 2', sets: 3},
-                    { name: 'Hammstrings - 1', sets: 3},
-                    { name: 'Hammstrings - 2', sets: 3},
-                    { name: 'Calves - 1', sets: 3},
-                    { name: 'Calves - 2', sets: 3},
-                    { name: 'Calves - 3', sets: 2}
+                    { name: 'Quads', sets: 3},
+                    { name: 'Hammstrings', sets: 3},
+                    { name: 'Quads', sets: 3},
+                    { name: 'Hammstrings', sets: 3},
+                    { name: 'Calves', sets: 3},
+                    { name: 'Calves', sets: 3},
+                    { name: 'Calves', sets: 2}
                 ]
             }
         ]
@@ -98,15 +98,21 @@ function App() {
             <NavBar />
             <div className="container">
                 <Switch>
-                    <Route exact path='/new' render={() => <WorkoutForm 
-                        workoutRoutines={workoutRoutines}
-                        logWorkout={logWorkout}
+                    <Route exact path='/new' render={() => 
+                        <WorkoutForm 
+                            workoutRoutines={workoutRoutines}
+                            logWorkout={logWorkout}/>}
+                        />
+                    <Route exact path='/log' render={() =>
+                        <TrainingLog
+                            workoutLog={workoutLog}/>}
+                        />
+                    <Route exact path='/calculator' render={() =>
+                        <Calculator />} />
+                    <Route path='/log/:date' render={(routeProps) => <SingleLog
+                            workoutLog={workoutLog}
+                            routeProps={routeProps}
                         />} />
-                    <Route exact path='/log' render={() => <TrainingLog
-                        workoutLog={workoutLog}
-                        />} />
-                    <Route exact path='/calculator' render={() => <Calculator />} />
-                    <Route path='/log/:date' render={routeProps => <SingleLog {...routeProps} />} />
                     <Redirect to='/new' />
                 </Switch>
             </div>

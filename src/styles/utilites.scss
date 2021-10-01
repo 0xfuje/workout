@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Mono&display=swap');
 
+
 $font-family-main: 'Poppins', sans-serif;
 $font-family-mono: 'Roboto Mono', monospace;
 
@@ -39,6 +40,16 @@ $color-action-light: #363547;
     background-color: $color-dark;
     color: $color-light;
     border-radius: 0.33rem;
+}
+
+@mixin icons {
+    &-icons {
+        display: flex;
+        gap: 1rem;
+    }
+    &-icon {
+        width: 1.5rem;
+    }
 }
 
 .title {

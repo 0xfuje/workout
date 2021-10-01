@@ -1,1 +1,28 @@
 @import './utilites.scss';
+
+
+.SingleLog {
+    @include icons;
+    color: $color-light;
+
+    &-exercises {
+        margin-top: 1rem;
+    }
+    &-exercise {
+        margin-bottom: 0.75rem;
+        color: $color-lightgrey;
+        &-name {
+            color: $color-light;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        &-sets {
+            font-family: $font-family-mono;
+            &-set {
+                &-number {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+}
