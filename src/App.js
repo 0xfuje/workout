@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from './NavBar';
 import WorkoutForm from './WorkoutForm';
 import TrainingLog from './TrainingLog';
+import SingleLog from './SingleLog';
 import Calculator from './Calculator';
 import backgroundImage from './images/blob-scene-haikei.svg';
 import './styles/App.scss';
@@ -101,8 +102,11 @@ function App() {
                         workoutRoutines={workoutRoutines}
                         logWorkout={logWorkout}
                         />} />
-                    <Route exact path='/log' render={() => <TrainingLog />} />
+                    <Route exact path='/log' render={() => <TrainingLog
+                        workoutLog={workoutLog}
+                        />} />
                     <Route exact path='/calculator' render={() => <Calculator />} />
+                    <Route path='/log/:date' render={routeProps => <SingleLog {...routeProps} />} />
                     <Redirect to='/new' />
                 </Switch>
             </div>

@@ -13,16 +13,16 @@ function Exercise(props) {
 
     // Set states
     const [sets, setSets] = useState(newSets);
-    const [plusSets, setPlusSets] = useState(0);
+    const [plusSets, setPlusSets] = useState(oldSets.length);
 
     // Setting states
     const [isSettingsDisplayed, setIsSettingsDisplayed] = useState(false);
     const [isRenameDisplayed, setIsRenameDisplayed] = useState(false);
-    const [isReplaceDisplayed, setIsReplaceDisplayed] = useState(false);
     const [rename, setRename] = useState();
     
     useEffect(() => setSets(newSets()), [plusSets]);
-    
+    if (plusSets === 0)  props.removeEx(props.id);
+
     // Functions in this comp - Handling functions
     const handleAddSet = () => {
         addSet();
@@ -32,7 +32,6 @@ function Exercise(props) {
     }
     const handleSettingsChange = (e) => {
         if (e.target.value === 'rename') setIsRenameDisplayed(true);
-        if (e.target.value === 'replace');
         if (e.target.value === 'remove') props.removeEx(props.id);
         setIsSettingsDisplayed(false);
     }
@@ -82,14 +81,13 @@ function Exercise(props) {
     <select className='Exercise-settings-selector' onChange={handleSettingsChange}>
         <option className='Exercise-settings-selector-option' value="none">Select One 🠗</option>
         <option className='Exercise-settings-selector-option' value="rename">Rename Exercise</option>
-        <option className='Exercise-settings-selector-option' value="replace">Replace Exercise</option>
         <option className='Exercise-settings-selector-option' value="remove">Remove Exercise</option>
     </select>
 
     const displayRename = 
     <div className="Exercise-settings-rename">
         <input className='Exercise-settings-rename-input input' onChange={handleRenameChange} placeholder='New Name'/>
-        <a className='Exercise-settings-rename-button button' onClick={handleRenameClick}>Rename</a>
+        <span className='Exercise-settings-rename-button button' onClick={handleRenameClick}>Rename</span>
     </div>
     
     
@@ -113,7 +111,7 @@ function Exercise(props) {
                     {displaySets}
                 </div>
             </div>
-            <a className='Exercise-addSet' onClick={handleAddSet}>Add Set</a>
+            <span className='Exercise-addSet' onClick={handleAddSet}>Add Set</span>
         </div>
     )
 }

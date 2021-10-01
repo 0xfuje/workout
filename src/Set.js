@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import trashCanIcon from './images/icons/trash-solid.svg';
 import checkSolidIcon from './images/icons/check-square-solid.svg';
-import checkIcon from './images/icons/check-square-regular.svg';
 import './styles/Set.scss';
 
 function Set(props) {
@@ -34,12 +33,12 @@ function Set(props) {
                 onChange={handleRpeChange} className='Set-input input' type="number" min="0" max="10"
             />
             <div className="Set-icons">
-                <a onClick={handleCheckSet} className="Set-check">
+                <span onClick={handleCheckSet} className="Set-check">
                     <img src={checkSolidIcon} alt="checkmark" />
-                </a>
-                <a onClick={handleDeleteSet} className="Set-delete">
+                </span>
+                <span onClick={handleDeleteSet} className="Set-delete">
                     <img src={trashCanIcon} alt="checkmark" />
-                </a>
+                </span>
             </div>
         </div>
     )

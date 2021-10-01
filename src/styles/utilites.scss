@@ -44,6 +44,8 @@ $color-action-light: #363547;
 .title {
     font-size: 1.5rem;
     font-weight: 500;
+    font-family: $font-family-main;
+    color: $color-light;
 }
 
 .flex {

@@ -36,9 +36,6 @@ function WorkoutForm(props) {
         newExercises.sort((a, b) => a.pos - b.pos);
         setExercises(newExercises);
     }
-    const replaceEx = (id) => {
-        const exToReplace = exercises.filter(ex => ex.id === id)[0];
-    }
     const removeEx = (id) => {
         const newExercises = exercises.filter(ex => ex.id !== id);
         setExercises(newExercises);
@@ -68,7 +65,6 @@ function WorkoutForm(props) {
         const today = new Date();
         const date = `${today.getFullYear()}/${today.getMonth()}/${today.getDate()}`;
         props.logWorkout(date, exercises);
-       
     } 
 
     // Display variables
@@ -85,23 +81,22 @@ function WorkoutForm(props) {
             key={ex.id} 
             pos={ex.pos}
             renameEx={renameEx}
-            replaceEx={replaceEx}
             removeEx={removeEx}
         />)
     });
 
     const displayButtons = 
     <Fragment>
-        {(!showNewExInput) ? <a onClick={handleShowNewExInput} className="WorkoutForm-button WorkoutForm-addExercise">add exercise</a> : ''}
-        <a onClick={handleCancelWorkout} className="WorkoutForm-button WorkoutForm-cancelWorkout">cancel workout</a>
-        <a onClick={handleFinishWorkout} className="WorkoutForm-button WorkoutForm-finishWorkout">finish workout</a>
+        {(!showNewExInput) ? <span onClick={handleShowNewExInput} className="WorkoutForm-button WorkoutForm-addExercise">add exercise</span> : ''}
+        <span onClick={handleCancelWorkout} className="WorkoutForm-button WorkoutForm-cancelWorkout">cancel workout</span>
+        <span onClick={handleFinishWorkout} className="WorkoutForm-button WorkoutForm-finishWorkout">finish workout</span>
     </Fragment>
 
     const displayNewExInput = 
     <div className="WorkoutForm-newEx">
         <input className='WorkoutForm-newEx-input input' onChange={handleNewExChange} placeholder='New Exercise Name'/>
-        <a className='WorkoutForm-newEx-button-add button' onClick={handleAddExercise}>Add New Exercise</a>
-        <a className='WorkoutForm-newEx-button-cancel button' onClick={handleShowNewExInput}>Cancel New Exercise</a>
+        <span className='WorkoutForm-newEx-button-add button' onClick={handleAddExercise}>Add New Exercise</span>
+        <span className='WorkoutForm-newEx-button-cancel button' onClick={handleShowNewExInput}>Cancel New Exercise</span>
     </div>
     
     

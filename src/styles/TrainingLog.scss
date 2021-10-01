@@ -1,0 +1,20 @@
+@import './utilites.scss';
+
+.TrainingLog {
+    color: $color-lightgrey;
+    
+    &-subtitle {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        color: $color-light;
+        font-weight: 500;
+    }
+    &-link {
+        display: block;
+        color: $color-light;
+        font-family: $font-family-mono;
+    }
+    &-back {
+        img { width: 1.5rem; }
+    }
+}
