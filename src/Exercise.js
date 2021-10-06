@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import Set from './Set';
 import { nanoid } from 'nanoid';
 import ellipsisSettingsIcon from './images/icons/ellipsis-v-solid.svg';
 import './styles/Exercise.scss';
+import Alert from './Alert';
 
 
 
@@ -20,11 +21,20 @@ function Exercise(props) {
     const [isRenameDisplayed, setIsRenameDisplayed] = useState(false);
     const [isBodypartDisplayed, setIsBodypartDisplayed] = useState(false);
 
+    // Alert states
+    const [alert, setAlert] = useState(false);
+    const [alertText, setAlertText] = useState();
+
     // Rename and new bodypart
     const [rename, setRename] = useState();
     const [bodypart, setBodypart] = useState(props.name);
 
-    
+    useEffect(() => {
+        const alertTimer = setTimeout(() => {
+            setAlert(false);
+        }, 3000);
+        return () => clearTimeout(alertTimer);
+    }, [alert])
     useEffect(() => setSets(newSets()), [plusSets]);
     if (plusSets === 0)  props.removeEx(props.id);
 
@@ -62,6 +72,14 @@ function Exercise(props) {
     // Functions passed down
     const checkSet = (pos, setData) => {
         const [weight, reps, rpe] = setData;
+        if (weight === 0) {
+            setAlertText('Add a valid number to weights');
+            return setAlert(true);
+        };
+        if (reps === 0) {
+            setAlertText('Add a valid number to reps');
+            return setAlert(true);
+        };
         oldSets[pos] = {weight, reps, rpe};
         setPlusSets(plusSets + '');
     }
@@ -113,6 +131,7 @@ function Exercise(props) {
                 <h2 className='Exercise-name'>{props.name}</h2>
                 <img src={ellipsisSettingsIcon} onClick={handleSettingsClick} className="Exercise-settings" alt="Exercise settings"/>
             </div>
+            {alert ? <Alert text={alertText} /> : ''}
             {isSettingsDisplayed ? displayExSettings : ''}
             {isRenameDisplayed ? displayRename : ''}
             {isBodypartDisplayed ? displayBodypartChange : ''}

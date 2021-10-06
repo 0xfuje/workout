@@ -85,7 +85,7 @@ function App() {
     
     
 
-    const logWorkout = (workout, date) => {
+    const logWorkout = (date, workout) => {
         setWorkoutLog([...workoutLog, 
         {
             date: date,

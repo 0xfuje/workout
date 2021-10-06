@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import trashCanIcon from './images/icons/trash-solid.svg';
 import checkSolidIcon from './images/icons/check-square-solid.svg';
 import './styles/Set.scss';
+import Alert from './Alert';
 
 function Set(props) {
-    const [weight, setWeight] = useState();
-    const [reps, setReps] = useState();
-    const [rpe, setRpe] = useState();
+    const [weight, setWeight] = useState(0);
+    const [reps, setReps] = useState(0);
+    const [rpe, setRpe] = useState(0);
     const handleWeightChange = (e) => setWeight(e.target.value);
     const handleRepsChange = (e) => setReps(e.target.value);
     const handleRpeChange = (e) => setRpe(e.target.value);
 
     const handleCheckSet = () => {
+        console.log(weight, reps);
+        
+        
         const setData = [weight, reps, rpe];
         props.checkSet(props.pos, setData);
     }

@@ -55,5 +55,9 @@
     }
 }
 
+.Alert-hidden {
+    display: none;
+}
+
 .button { @include button };
 .input { @include input };
